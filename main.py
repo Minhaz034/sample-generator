@@ -2,9 +2,21 @@ import random
 import math
 import matplotlib.pyplot as plt
 
-def arb_discrete(probs) ->list(float):
+def arb_discrete(probs):
+    probs = list(probs)
     n = len(probs)
-    for i in range
+    lower_bound = 0
+    upper_bound = probs[0]
+    u = random.random()
+    sample = 0
+    for i in range(n):
+        #print(f"lower:{lower_bound}\tu={u}\tupper:{upper_bound}")
+        if lower_bound <= u < upper_bound:
+            sample = i
+            break
+        lower_bound = upper_bound
+        upper_bound = upper_bound + probs[i+1]
+    return sample
 
 
 def bernoulli(p):
@@ -119,6 +131,11 @@ def sampleGen(n_samples, distribution, **parameters):
         sigma = parameters['sigma']
         generated_samples = [sample for i in range(n_samples) for sample in normal(meu, sigma)]
 
+    elif distribution == 'arb-discrete':
+        probs = parameters['probs']
+        print(probs)
+        generated_samples = [arb_discrete(probs=probs) for i in range(n_samples)]
+    
 
     return generated_samples
 
@@ -136,8 +153,11 @@ if __name__ == '__main__':
                              meu = 0, 
                              sigma = 1
     )
-    print(samples_norm)
-    plt.hist(samples_norm)
+    samples_arb = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [.125,.375,.375,.125])
+    samples_arb2 = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6])
+    
+    print(samples_arb2)
+    plt.hist(samples_arb2)
     plt.show()
 
 
