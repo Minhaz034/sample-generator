@@ -155,11 +155,8 @@ def process_parameters(params_list):
 
 def main():
     parser = argparse.ArgumentParser(description='Sample Generation Script')    
-    # Mandatory arguments
     parser.add_argument('n_samples', type=int, help='Number of samples to generate')
     parser.add_argument('distribution', type=str, help='Type of distribution (e.g., normal, poisson)')
-    
-    # Optional keyword arguments
     parser.add_argument('--params', nargs='+',required=True, help='Additional parameters for the distribution in key=value format')
 
     args = parser.parse_args()
@@ -176,19 +173,7 @@ def main():
 
 
 if __name__ == '__main__':
-    #samples = sampleGen(n_samples=10000, distribution='gamma',alpha=2,lam = 3)
-    # samples_norm = sampleGen(n_samples=100, 
-    #                          distribution='normal', 
-    #                          meu = 0, 
-    #                          sigma = 1
-    # )
-    # samples_arb = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [.125,.375,.375,.125])
-    # samples_arb2 = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6])
-    
     main()
 
-    # print(samples_arb2)
-    # plt.hist(samples_arb2)
-    # plt.show()
 
 
