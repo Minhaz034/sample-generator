@@ -4,8 +4,15 @@
 ### Version: 3.8.8
 #### Command Line Arguments:
 format of the commmand line arguments:
+```
 python main.py <n_samples:int> <distribution:string> --params <param_1_name>=<param_1_value> <param_2_name>=<param_2_value> ....<param_n_name>=<param_n_value>  
+```
 
+##### Note: For the arb-discrete method the parameter is a list of probability values. The command line takes this as a comma separated 'probs' parameter.
+- Format:
+```
+python main.py <n_samples:int> <distribution:string> --params probs=<p0>,<p1>,<p2>, ......<pn>
+```
 
 ```
 python main.py 1000 'arb-discrete' --params probs=0.125,.375,.375,.125
