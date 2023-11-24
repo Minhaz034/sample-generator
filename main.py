@@ -29,22 +29,19 @@ def bernoulli(p):
         sample = 1
     return sample
 
-def binomial(n :int,p:float):
+def binomial(n,p):
+    n = int(n)
     sample = 0
     for i in range(n):
         sample += bernoulli(p)
     return sample
 
 def geometric(p):
-    geom_sample = 0
-    while(1):
-        bern_sample = bernoulli(p)
-        geom_sample += 1
-        if bern_sample == 1:
-            break
-    return geom_sample
+    u = random.random()
+    return math.ceil(math.log(1-u) / math.log(1-p))
 
 def neg_binomial(k,p):
+    k = int(k)
     neg_binom_sample = 0
     for i in range(k):
         neg_binom_sample += geometric(p=p)
