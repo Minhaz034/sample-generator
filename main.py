@@ -2,6 +2,10 @@ import random
 import math
 import matplotlib.pyplot as plt
 
+def arb_discrete(probs) ->list(float):
+    n = len(probs)
+    for i in range
+
 
 def bernoulli(p):
     u = random.random()
@@ -45,10 +49,21 @@ def poisson(lambda_val):
 
 def exponential(lam):
     u = random.random()
-    sample = -(1/lam)*
+    return -(1/lam)* math.log(1-u)
 
+def gamma(alpha, lam):
+    exp_samples = [exponential(lam) for i in range(alpha)]
+    return sum(exp_samples)
 
-
+def normal(meu, sigma):
+    u1 = random.random()
+    u2 = random.random()
+    log_term  = math.sqrt(-2*math.log(u1))
+    z1 = log_term * math.cos(2*math.pi*u2)
+    z2 = log_term * math.sin(2*math.pi*u2) 
+    x1 = z1*sigma + meu
+    x2 = z2*sigma + meu
+    return x1, x2
 
 def uniform(a,b):
     u = random.random()
@@ -90,7 +105,19 @@ def sampleGen(n_samples, distribution, **parameters):
         b = parameters['b']
         generated_samples = [uniform(a,b) for i in range(n_samples)]
 
-
+    elif distribution == 'exponential':
+        lam = parameters['lam']
+        generated_samples = [exponential(lam) for i in range(n_samples)]
+   
+    elif distribution == 'gamma':
+        alpha = parameters['alpha']
+        lam = parameters['lam']
+        generated_samples = [gamma(alpha,lam) for i in range(n_samples)]
+    
+    elif distribution == 'normal':
+        meu = parameters['meu']
+        sigma = parameters['sigma']
+        generated_samples = [sample for i in range(n_samples) for sample in normal(meu, sigma)]
 
 
     return generated_samples
@@ -103,9 +130,14 @@ def sampleGen(n_samples, distribution, **parameters):
 
 
 if __name__ == '__main__':
-    samples = sampleGen(n_samples=10000, distribution='geometric',p=0.4)
-    print(samples)
-    plt.hist(samples)
+    #samples = sampleGen(n_samples=10000, distribution='gamma',alpha=2,lam = 3)
+    samples_norm = sampleGen(n_samples=100, 
+                             distribution='normal', 
+                             meu = 0, 
+                             sigma = 1
+    )
+    print(samples_norm)
+    plt.hist(samples_norm)
     plt.show()
 
 
