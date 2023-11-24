@@ -1,5 +1,7 @@
 import random
 import math
+import argparse
+
 import matplotlib.pyplot as plt
 
 def arb_discrete(probs):
@@ -26,7 +28,7 @@ def bernoulli(p):
         sample = 1
     return sample
 
-def binomial(n,p):
+def binomial(n :int,p:float):
     sample = 0
     for i in range(n):
         sample += bernoulli(p)
@@ -139,25 +141,44 @@ def sampleGen(n_samples, distribution, **parameters):
 
     return generated_samples
 
-    
 
-
+def main():
+    parser = argparse.ArgumentParser(description='Sample Generation Script')    
+    # Mandatory arguments
+    parser.add_argument('n_samples', type=int, help='Number of samples to generate')
+    parser.add_argument('distribution', type=str, help='Type of distribution (e.g., normal, poisson)')
     
+    # Optional keyword arguments
+    parser.add_argument('--params', nargs='+',required=True, help='Additional parameters for the distribution in key=value format')
+
+    args = parser.parse_args()
+
+    # Process additional parameters
+    parameters = {}
+    if args.params:
+        for param in args.params:
+            key, value = param.split('=')
+            parameters[key] = value
+    print(parameters)
+    samples = sampleGen(args.n_samples, args.distribution, **parameters)
+    print(samples)
 
 
 
 if __name__ == '__main__':
     #samples = sampleGen(n_samples=10000, distribution='gamma',alpha=2,lam = 3)
-    samples_norm = sampleGen(n_samples=100, 
-                             distribution='normal', 
-                             meu = 0, 
-                             sigma = 1
-    )
-    samples_arb = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [.125,.375,.375,.125])
-    samples_arb2 = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6])
+    # samples_norm = sampleGen(n_samples=100, 
+    #                          distribution='normal', 
+    #                          meu = 0, 
+    #                          sigma = 1
+    # )
+    # samples_arb = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [.125,.375,.375,.125])
+    # samples_arb2 = sampleGen(n_samples=5000,distribution='arb-discrete',probs = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6])
     
-    print(samples_arb2)
-    plt.hist(samples_arb2)
-    plt.show()
+    main()
+
+    # print(samples_arb2)
+    # plt.hist(samples_arb2)
+    # plt.show()
 
 
