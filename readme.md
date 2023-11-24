@@ -14,6 +14,7 @@ python main.py <n_samples:int> <distribution:string> --params <param_1_name>=<pa
 python main.py <n_samples:int> <distribution:string> --params probs=<p0>,<p1>,<p2>, ......<pn>
 ```
 
+Some example command line args :
 ```
 python main.py 1000 'arb-discrete' --params probs=0.125,.375,.375,.125
 python main.py 10000 'uniform' --params a=0 b=1
