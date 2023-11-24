@@ -64,7 +64,7 @@ def exponential(lam):
     return -(1/lam)* math.log(1-u)
 
 def gamma(alpha, lam):
-    exp_samples = [exponential(lam) for i in range(alpha)]
+    exp_samples = [exponential(lam) for i in range(int(alpha))]
     return sum(exp_samples)
 
 def normal(meu, sigma):
