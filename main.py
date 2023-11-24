@@ -5,7 +5,8 @@ import argparse
 import matplotlib.pyplot as plt
 
 def arb_discrete(probs):
-    probs = list(probs)
+    #probs = list(probs)
+    print(probs)
     n = len(probs)
     lower_bound = 0
     upper_bound = probs[0]
@@ -142,6 +143,19 @@ def sampleGen(n_samples, distribution, **parameters):
     return generated_samples
 
 
+def process_parameters(params_list):
+    parameters = {}
+    for param in params_list:
+        key, value = param.split('=')
+        # Check if the value contains a list (comma-separated)
+        if ',' in value:
+            value = [float(v) for v in value.split(',')]
+        else:
+            value = float(value)
+        parameters[key] = value
+    return parameters
+
+
 def main():
     parser = argparse.ArgumentParser(description='Sample Generation Script')    
     # Mandatory arguments
@@ -155,13 +169,12 @@ def main():
 
     # Process additional parameters
     parameters = {}
-    if args.params:
-        for param in args.params:
-            key, value = param.split('=')
-            parameters[key] = value
-    print(parameters)
+    parameters = process_parameters(args.params)
     samples = sampleGen(args.n_samples, args.distribution, **parameters)
     print(samples)
+    print(samples)
+    plt.hist(samples)
+    plt.show()
 
 
 
