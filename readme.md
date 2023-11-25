@@ -27,4 +27,6 @@ python main.py 100 'gamma' --params alpha=10 lam=3
 python main.py 100 'normal' --params meu=0 sigma=1
 
 ```
-
+### Size of Monte Carlo Study:
+This code is written to handle to take number of samples from the user. However, to check the required 
+number of samples with a given probability of error margin check answer to 5.7(d).

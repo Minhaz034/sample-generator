@@ -5,8 +5,6 @@ import argparse
 import matplotlib.pyplot as plt
 
 def arb_discrete(probs):
-    #probs = list(probs)
-    print(probs)
     n = len(probs)
     lower_bound = 0
     upper_bound = probs[0]
@@ -165,7 +163,6 @@ def main():
     parameters = {}
     parameters = process_parameters(args.params)
     samples = sampleGen(args.n_samples, args.distribution, **parameters)
-    print(samples)
     print(samples)
     plt.hist(samples)
     plt.show()
