@@ -1,5 +1,4 @@
-### Full Name: Minhaz Bin Farukee
-### ID: 1002154424
+
 ### Language : Python
 ### Version: 3.8.8
 #### Command Line Arguments:
